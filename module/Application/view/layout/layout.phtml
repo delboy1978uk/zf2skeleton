@@ -1,29 +1,39 @@
-<?php echo $this->doctype(); ?>
+<?php 
+
+    use Del\Cdn;
+    use Del\Icon;
+
+    echo $this->doctype(); 
+
+?>
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('Delboy Skeleton App ')->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?php echo $this->headMeta()
+        <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
 
         <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath('css/style.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
-
+        <?= Cdn::bootstrapCssLink(); ?>
+        <?= Cdn::fontAwesomeCssLink(); ?>
+        <?= Cdn::jQueryUiCssLink(); ?>
+        <?= $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css')); ?>
+        <?= Cdn::delCssLink(); ?>
+        
         <!-- Scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery.min.js'))
+        <?= Cdn::jQueryJavascript(); ?>
+        <?= Cdn::bootstrapJavascript(); ?>
+        <?= Cdn::jQueryUIJavascript(); ?>
+        <?= $this->headScript()
             ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
             ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
         ; ?>
-
+        
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -34,22 +44,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Delboy1978uk"/>&nbsp;<?php echo $this->translate('Del Skeleton App') ?></a>
+                    <a class="navbar-brand" href="<?= $this->url('home') ?>"><img src="<?= $this->basePath('img/zf2-logo.png') ?>" alt="Delboy1978uk"/>&nbsp;<?= $this->translate('Del Skeleton App') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li class="active"><a href="<?= $this->url('home') ?>"><?= $this->translate('Home') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
         <div class="container">
-            <?php echo $this->content; ?>
+            <?= $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; <?= date('Y') > 2015 ? '2015 - '.date('Y') : date('Y'); ?> delboy1978uk. <?= $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+        <?= $this->inlineScript() ?>
     </body>
 </html>
