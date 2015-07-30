@@ -12,5 +12,19 @@
  */
 
 return array(
-    // ...
+    'db' => array(
+        'driver'    => 'PdoMysql',
+        'hostname'  => 'localhost',
+        'database'  => 'changeme',  // define in local.php
+        'username'  => 'changeme',
+        'password'  => 'changeme',
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+        ),
+    ),
+    'zfcuser' => [
+        'auth_adapters' => [80 => 'HtUserRegistration\Authentication\Adapter\EmailVerification'],
+    ]
 );

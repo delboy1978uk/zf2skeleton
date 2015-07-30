@@ -10,11 +10,16 @@
     "require": {
         "php": ">=5.5",
         "zendframework/zendframework": "~2.5",
-	"monolog/monolog": "1.*",
+	    "monolog/monolog": "1.*",
         "delboy1978uk/cdn": "1.*",
-        "delboy1978uk/image": "1.*"
+        "delboy1978uk/image": "1.*",
+        "zf-commons/zfc-base": "~0.1.0",
+        "hrevert/ht-user-registration": "0.0.*",
+        "bjyoungblood/bjy-authorize": "1.4.*"
     },
     "require-dev": {
-        "codeception/codeception": "dev-master"
+        "codeception/codeception": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master"
     }
 }
