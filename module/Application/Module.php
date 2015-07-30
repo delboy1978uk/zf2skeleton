@@ -22,9 +22,11 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         $sharedManager  = $eventManager->getSharedManager();
-        $sharedManager->attach('HtUserRegistration\Service\UserRegistrationService', 'createRegistrationRecord.post', function (Event $e) use ($app) {
-            $controller = $e->getTarget();
-            $controller->plugin('redirect')->toRoute('checkemailtoactivate');
+        $sharedManager->attach('HtUserRegistration\Service\UserRegistrationService', 'createRegistrationRecord.post', function (Event $event) use ($e) {
+            $event->stopPropagation(true);
+            $routes = $e->getRouter()->getRoutes();
+            array_push($routes,'checkemailtoactivate');
+            $e->getRouter()->setRoutes($routes);
         });
     }
 
