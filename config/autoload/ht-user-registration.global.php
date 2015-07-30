@@ -39,7 +39,7 @@ $options = array(
      *
      * Accepted values: boolean
      */
-    'enable_request_expiry' => false,
+    'enable_request_expiry' => true,
     /**
      * Email Expiry in seconds
      *
@@ -93,7 +93,7 @@ $options = array(
     /**
      * Post Verification route
      */
-     'post_verification_route' => 'zfcuser/login'
+     'post_verification_route' => 'activated'
 );
 
 /**

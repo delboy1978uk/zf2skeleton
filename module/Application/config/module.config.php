@@ -50,6 +50,50 @@ return array(
                     ),
                 ),
             ),
+            'activated' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/user/activated',
+                    'defaults' => array(
+                        'controller' => 'PhlySimplePage\Controller\Page',
+                        'template'   => 'zfc-user/user/activated',
+                        // optionally set a specific layout for this page
+                        //'layout'     => 'layout/some-layout',
+                    ),
+                ),
+            ),
+            'checkemailtoactivate' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/user/activation-email-sent',
+                    'defaults' => array(
+                        'controller' => 'PhlySimplePage\Controller\Page',
+                        'template'   => 'zfc-user/user/checkemailtoactivate',
+                        // optionally set a specific layout for this page
+                        //'layout'     => 'layout/some-layout',
+                    ),
+                ),
+            ),
+            'terms' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/terms',
+                    'defaults' => array(
+                        'controller' => 'PhlySimplePage\Controller\Page',
+                        'template'   => 'static/terms',
+                    ),
+                ),
+            ),
+            'privacy' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/privacy',
+                    'defaults' => array(
+                        'controller' => 'PhlySimplePage\Controller\Page',
+                        'template'   => 'static/privacy',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

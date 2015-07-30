@@ -15,7 +15,8 @@
         "delboy1978uk/image": "1.*",
         "zf-commons/zfc-base": "~0.1.0",
         "hrevert/ht-user-registration": "0.0.*",
-        "bjyoungblood/bjy-authorize": "1.4.*"
+        "bjyoungblood/bjy-authorize": "1.4.*",
+        "phly/phly-simple-page": "1.*"
     },
     "require-dev": {
         "codeception/codeception": "dev-master",
