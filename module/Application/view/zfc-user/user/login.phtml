@@ -1,0 +1,32 @@
+<h1><?= $this->translate('Sign In'); ?></h1>
+
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/login'));
+$form->setAttribute('method', 'post');
+?>
+
+<?= $this->form()->openTag($form) ?>
+
+<dl class="zend_form">
+    <?= $this->formElementErrors($form->get('identity')) ?>
+
+    <dt><?= $this->formLabel($form->get('identity')) ?></dt>
+    <dd><?= $this->formInput($form->get('identity')) ?></dd>
+
+    <dt><?= $this->formLabel($form->get('credential')) ?></dt>
+    <dd><?= $this->formInput($form->get('credential')) ?></dd>
+
+    <?php if ($this->redirect): ?>
+        <input type="hidden" name="redirect" value="<?= $this->escapeHtml($this->redirect) ?>" />
+    <?php endif ?>
+
+    <dd><?= $this->formButton($form->get('submit')) ?></dd>
+</dl>
+
+<?= $this->form()->closeTag() ?>
+
+<?php if ($this->enableRegistration) : ?>
+    <?= $this->translate('Not registered?'); ?> <a href="<?= $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?= $this->translate('Sign up!'); ?></a>
+<?php endif; ?>

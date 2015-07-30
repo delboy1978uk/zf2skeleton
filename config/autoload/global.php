@@ -24,7 +24,4 @@ return array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
     ),
-    'zfcuser' => [
-        'auth_adapters' => [80 => 'HtUserRegistration\Authentication\Adapter\EmailVerification'],
-    ]
 );
