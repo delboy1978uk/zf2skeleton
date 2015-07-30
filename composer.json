@@ -9,6 +9,11 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.5",
-        "zendframework/zendframework": "~2.5"
+        "zendframework/zendframework": "~2.5",
+        "delboy1978uk/cdn": "1.*",
+        "delboy1978uk/image": "1.*"
+    },
+    "require-dev": {
+        "codeception/codeception": "dev/master"
     }
 }
