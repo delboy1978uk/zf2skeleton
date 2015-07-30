@@ -11,14 +11,21 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\EventManager\Event;
 
 class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
+        $app = $e->getApplication();
+        $eventManager        = $app->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $sharedManager  = $eventManager->getSharedManager();
+        $sharedManager->attach('HtUserRegistration\Service\UserRegistrationService', 'createRegistrationRecord.post', function (Event $e) use ($app) {
+            $controller = $e->getTarget();
+            $controller->plugin('redirect')->toRoute('checkemailtoactivate');
+        });
     }
 
     public function getConfig()
