@@ -10,10 +10,11 @@
     "require": {
         "php": ">=5.5",
         "zendframework/zendframework": "~2.5",
+	"monolog/monolog": "1.*",
         "delboy1978uk/cdn": "1.*",
         "delboy1978uk/image": "1.*"
     },
     "require-dev": {
-        "codeception/codeception": "dev/master"
+        "codeception/codeception": "dev-master"
     }
 }
