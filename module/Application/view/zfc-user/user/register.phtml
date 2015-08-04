@@ -7,7 +7,7 @@ if (!$this->enableRegistration) {
 }
 $form = $this->registerForm;
 $form->prepare();
-$form->setAttribute('action', $this->url('zfcuser/register'));
+$form->setAttribute('action', $this->url('zfcuser/register',['redirect' => 'zfcuser/verify-mail-sent']));
 $form->setAttribute('method', 'post');
 ?>
 

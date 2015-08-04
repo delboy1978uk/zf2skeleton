@@ -21,6 +21,7 @@
     "require-dev": {
         "codeception/codeception": "dev-master",
         "bjyoungblood/bjy-profiler": "dev-master",
-        "zendframework/zend-developer-tools": "dev-master"
+        "zendframework/zend-developer-tools": "dev-master",
+        "zendframework/zftool": "dev-master"
     }
 }

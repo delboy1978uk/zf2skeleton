@@ -62,15 +62,13 @@ return array(
                     ),
                 ),
             ),
-            'checkemailtoactivate' => array(
+            'verify-mail-sent' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/user/activation-email-sent',
+                    'route' => '/user/thanks-for-registering',
                     'defaults' => array(
                         'controller' => 'PhlySimplePage\Controller\Page',
-                        'template'   => 'zfc-user/user/checkemailtoactivate',
-                        // optionally set a specific layout for this page
-                        //'layout'     => 'layout/some-layout',
+                        'template'   => 'zfc-user/user/verify-mail-sent',
                     ),
                 ),
             ),

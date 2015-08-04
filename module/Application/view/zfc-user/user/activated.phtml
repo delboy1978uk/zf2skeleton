@@ -2,3 +2,9 @@
 <p class="lead">
     Your account has been activated! You can now log in.
 </p>
+<div class="col-md-8 col-md-offset-2">
+    <?= $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+    <h3><?= $this->translate('Hello'); ?>, <?= $this->zfcUserDisplayName() ?>!</h3>
+    <a href="<?= $this->url('zfcuser/logout') ?>">[<?= $this->translate('Sign Out'); ?>]</a>
+</div>
+<br />

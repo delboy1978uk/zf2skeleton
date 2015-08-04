@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.24-2+deb.sury.org~trusty+2)
 # Database: zf2lab
-# Generation Time: 2015-07-30 06:43:59 +0000
+# Generation Time: 2015-08-04 04:01:59 +0000
 # ************************************************************
 
 
@@ -37,15 +37,6 @@ CREATE TABLE `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-
-INSERT INTO `user` (`user_id`, `username`, `email`, `display_name`, `password`, `state`)
-VALUES
-	(1,NULL,'delboy1978uk@gmail.com',NULL,'$2y$14$.ebPriMS/xJ4qGoZ1KlOI.Z5t9SY19uMj9AbXW74o0K6AAZ3G5iA.',NULL);
-
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table user_registration
@@ -62,6 +53,48 @@ CREATE TABLE `user_registration` (
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `token_UNIQUE` (`token`),
   CONSTRAINT `user_registration_fk1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table user_role
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_role`;
+
+CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` varchar(255) NOT NULL DEFAULT '',
+  `is_default` tinyint(1) NOT NULL,
+  `parent_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `user_role` WRITE;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+
+INSERT INTO `user_role` (`id`, `role_id`, `is_default`, `parent_id`)
+VALUES
+	(1,'guest',1,NULL),
+	(2,'user',0,'guest'),
+	(3,'admin',0,'user'),
+	(4,'superuser',0,'admin');
+
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table user_role_linker
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_role_linker`;
+
+CREATE TABLE `user_role_linker` (
+  `user_id` int(11) unsigned NOT NULL,
+  `role_id` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `user_role_linker_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

@@ -50,7 +50,10 @@ $settings = array(
      * Default value: array containing 'ZfcUser\Authentication\Adapter\Db' with priority 100
      * Accepted values: array containing services that implement 'ZfcUser\Authentication\Adapter\ChainableAdapter'
      */
-    'auth_adapters' => [80 => 'HtUserRegistration\Authentication\Adapter\EmailVerification'],
+    'auth_adapters' => [
+        100 => 'ZfcUser\Authentication\Adapter\Db',
+        80 => 'HtUserRegistration\Authentication\Adapter\EmailVerification'
+    ],
 
     /**
      * Enable Display Name
@@ -101,7 +104,7 @@ $settings = array(
      *
      * Accepted values: boolean true or false
      */
-    //'login_after_registration' => true,
+    'login_after_registration' => false,
 
     /**
      * Registration Form Captcha
@@ -134,7 +137,7 @@ $settings = array(
      *
      * Accepted values: boolean true or false
      */
-    //'use_redirect_parameter_if_present' => true,
+    'use_redirect_parameter_if_present' => false,
 
     /**
 	 * Sets the view template for the user login widget
@@ -153,7 +156,7 @@ $settings = array(
      * Accepted values: A valid route name within your application
      *
      */
-    //'login_redirect_route' => 'zfcuser',
+//    'login_redirect_route' => 'zfcuser',
 
     /**
      * Logout Redirect Route
@@ -163,7 +166,7 @@ $settings = array(
      * Default value: 'zfcuser/login'
      * Accepted values: A valid route name within your application
      */
-    //'logout_redirect_route' => 'zfcuser/login',
+    'logout_redirect_route' => 'home',
 
     /**
      * Password Security
