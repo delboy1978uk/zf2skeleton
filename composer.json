@@ -1,12 +1,12 @@
 {
-    "name": "zendframework/skeleton-application",
-    "description": "Skeleton Application for ZF2",
+    "name": "delboy1978uk/zf2skeleton",
+    "description": "A skeleton app with meat on the bone",
     "license": "BSD-3-Clause",
     "keywords": [
         "framework",
         "zf2"
     ],
-    "homepage": "http://framework.zend.com/",
+    "homepage": "https://github.com/delboy1978uk/zf2skeleton",
     "require": {
         "php": ">=5.5",
         "zendframework/zendframework": "~2.5",
