@@ -33,6 +33,7 @@ return [
                 ['route' => 'home', 'roles' => ['guest', 'user']],
                 ['route' => 'verify-mail-sent', 'roles' => ['guest']],
                 ['route' => 'activated', 'roles' => ['guest']],
+                ['route' => 'forgot-password', 'roles' => ['guest']],
             ],
         ],
     ],

@@ -72,6 +72,16 @@ return array(
                     ),
                 ),
             ),
+            'forgot-password' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/user/forgot-password[/:email]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'forgot-password',
+                    ),
+                ),
+            ),
             'terms' => array(
                 'type' => 'Literal',
                 'options' => array(

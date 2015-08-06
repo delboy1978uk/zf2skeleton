@@ -10,7 +10,7 @@ $form->setAttribute('method', 'post');
 <?= $this->form()->openTag($form) ?>
 
 <dl class="zend_form">
-    <?= $this->formElementErrors($form->get('identity')) ?>
+    <?= $this->formElementErrors($form->get('identity'), ['class' => 'errors']) ?>
 
     <dt><?= $this->formLabel($form->get('identity')) ?></dt>
     <dd><?= $this->formInput($form->get('identity')) ?></dd>
