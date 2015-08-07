@@ -44,3 +44,21 @@ div.container a.brand {
 {
     color: #843534;
 }
+
+form.form-inline{
+    overflow: auto;
+}
+form.form-inline label{
+    float: left;
+    clear: both;
+}
+form.form-inline label span{
+    display: inline-block;
+    min-width: 150px;
+}
+form.form-inline input[type="submit"]
+{
+    margin-left: 150px;
+    float: left;
+    clear: both;
+}

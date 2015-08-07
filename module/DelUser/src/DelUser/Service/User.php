@@ -13,8 +13,22 @@ use ZfcUser\Entity\User as ZfcUser;
 
 class User
 {
+    /** @var ServiceLocatorInterface */
+    protected $sl;
+
+    /** @var $svc UserSvc */
+    protected $zfc_user_svc;
+
+    /** @var $mapper UserRegistrationMapperInterface */
+    protected $reg_mapper;
+
+    /** @var $mailer Mail */
+    protected $mailer;
+
     public function sendPasswordResetEmail($email,ServiceLocatorInterface $sl)
     {
+        $this->sl = $sl;
+
         if(!$email){
             throw new Exception('No Email passed');
         }
@@ -24,8 +38,7 @@ class User
             throw new Exception('This is not an email address!');
         }
 
-        /** @var $svc UserSvc */
-        $svc = $sl->get('zfcuser_user_service');
+        $svc = $this->getZfcUserSvc();
         /** @var $user ZfcUser */
         $user = $svc->getUserMapper()->findByEmail($email);
         if(!$user){
@@ -34,7 +47,7 @@ class User
 
         $time = new DateTime();
         /** @var $mapper UserRegistrationMapperInterface */
-        $mapper = $sl->get('HtUserRegistration\UserRegistrationMapper');
+        $mapper = $this->getRegMapper();
         $registration = $mapper->findByUser($user);
         $registration->generateToken();
         $registration->setRequestTime($time);
@@ -43,7 +56,7 @@ class User
         $token = $registration->getToken();
 
         /** @var $mailer Mail */
-        $mailer = $sl->get('MtMail\Service\Mail');
+        $mailer = $this->getMailer();
         $message = $mailer->compose([
             'to' => $email,
         ],
@@ -57,4 +70,67 @@ class User
         $mailer->send($message);
 
     }
+
+    /**
+     * @param $id
+     * @param $token
+     * @param ServiceLocatorInterface $sl
+     * @return bool
+     * @throws \Exception
+     */
+    public function tokenMatches($id,$token,ServiceLocatorInterface $sl)
+    {
+        $this->sl = $sl;
+        $user = $this->getZfcUserSvc()->getUserMapper()->findById($id);
+        if(!$user)
+        {
+            throw new Exception('No user found with that ID.');
+        }
+        $reg = $this->getRegMapper()->findByUser($user);
+        if($reg->getToken() !== $token)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return \MtMail\Service\Mail
+     */
+    public function getMailer()
+    {
+        if(!$this->mailer)
+        {
+            $this->mailer = $this->sl->get('MtMail\Service\Mail');
+        }
+        return $this->mailer;
+    }
+
+
+    /**
+     * @return array|object|UserSvc
+     */
+    public function getZfcUserSvc()
+    {
+        if(!$this->zfc_user_svc)
+        {
+            $this->zfc_user_svc = $this->sl->get('zfcuser_user_service');
+        }
+        return $this->zfc_user_svc;
+    }
+
+
+    /**
+     * @return array|UserRegistrationMapperInterface|object
+     */
+    public function getRegMapper()
+    {
+        if(!$this->reg_mapper)
+        {
+            $this->reg_mapper = $this->sl->get('HtUserRegistration\UserRegistrationMapper');
+        }
+        return $this->reg_mapper;
+    }
+
+
 }

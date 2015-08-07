@@ -8,14 +8,15 @@
 namespace DelUser\Controller;
 
 use Zend\View\Model\ViewModel;
-use ZfcUser\Service\User;
 use ZfcUser\Controller\UserController as ZfcUserController;
+use DelUser\Form\ResetPassword;
 
 class UserController extends ZfcUserController
 {
     public function forgotPasswordAction()
     {
         $email = $this->params()->fromRoute('email');
+
         /** @var $svc \DelUser\Service\User */
         $svc = $this->getServiceLocator()->get('del_user_svc');
         $svc->sendPasswordResetEmail($email, $this->getServiceLocator());
@@ -30,9 +31,18 @@ class UserController extends ZfcUserController
         $id = $this->params()->fromRoute('id');
         $token = $this->params()->fromRoute('token');
 
+        /** @var $svc \DelUser\Service\User */
+        $svc = $this->getServiceLocator()->get('del_user_svc');
+        if(!$svc->tokenMatches($id,$token,$this->getServiceLocator())){
+            $this->getResponse()->setStatusCode(403);
+            return true;
+        }
+
+        $form = new ResetPassword('reset-pass');
+
+
         return new ViewModel([
-            'id' => $id,
-            'token' => $token,
+            'form' => $form
         ]);
     }
 
