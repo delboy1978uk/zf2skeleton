@@ -17,7 +17,6 @@ return array(
         'Application',
         'PhlySimplePage',
         'Admin',
-        'DelUser',
     ),
     'module_listener_options' => array(
         'module_paths' => array(

@@ -17,6 +17,8 @@ return [
 
         'guards' => [
             'BjyAuthorize\Guard\Route'=> [
+
+                // we will have a module that gets these from db but for now manually defining
                 ['route' => 'zfcuser', 'roles' => ['user']],
                 ['route' => 'zfcuser/logout', 'roles' => ['user']],
                 ['route' => 'zfcuser/login', 'roles' => ['guest']],
@@ -34,6 +36,9 @@ return [
                 ['route' => 'verify-mail-sent', 'roles' => ['guest']],
                 ['route' => 'activated', 'roles' => ['guest']],
                 ['route' => 'forgot-password', 'roles' => ['guest']],
+
+                // console-routes
+                ['route' => 'zftool-create-module', 'roles' => ['guest']],
             ],
         ],
     ],

@@ -50,38 +50,6 @@ return array(
                     ),
                 ),
             ),
-            'activated' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/user/activated',
-                    'defaults' => array(
-                        'controller' => 'PhlySimplePage\Controller\Page',
-                        'template'   => 'zfc-user/user/activated',
-                        // optionally set a specific layout for this page
-                        //'layout'     => 'layout/some-layout',
-                    ),
-                ),
-            ),
-            'verify-mail-sent' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/user/thanks-for-registering',
-                    'defaults' => array(
-                        'controller' => 'PhlySimplePage\Controller\Page',
-                        'template'   => 'zfc-user/user/verify-mail-sent',
-                    ),
-                ),
-            ),
-            'forgot-password' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/user/forgot-password[/:email]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'forgot-password',
-                    ),
-                ),
-            ),
             'terms' => array(
                 'type' => 'Literal',
                 'options' => array(
