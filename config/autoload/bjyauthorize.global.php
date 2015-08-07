@@ -24,6 +24,9 @@ return [
                 ['route' => 'zfcuser/login', 'roles' => ['guest']],
                 ['route' => 'zfcuser/register', 'roles' => ['guest']],
                 ['route' => 'zfcuser/verify_email', 'roles' => ['guest']],
+                ['route' => 'zfcuser/verify-mail-sent', 'roles' => ['guest']],
+                ['route' => 'zfcuser/activated', 'roles' => ['guest']],
+                ['route' => 'zfcuser/forgot-password', 'roles' => ['guest']],
                 ['route' => 'scn-social-auth-user/login', 'roles' => ['guest']],
                 ['route' => 'scn-social-auth-user/login/provider', 'roles' => ['guest']],
                 ['route' => 'scn-social-auth-hauth', 'roles' => ['guest']],
@@ -33,9 +36,6 @@ return [
 
                 // app routes
                 ['route' => 'home', 'roles' => ['guest', 'user']],
-                ['route' => 'verify-mail-sent', 'roles' => ['guest']],
-                ['route' => 'activated', 'roles' => ['guest']],
-                ['route' => 'forgot-password', 'roles' => ['guest']],
 
                 // console-routes
                 ['route' => 'zftool-create-module', 'roles' => ['guest']],

@@ -30,3 +30,7 @@ $form->setAttribute('method', 'post');
 <?php if ($this->enableRegistration) : ?>
     <?= $this->translate('Not registered?'); ?> <a href="<?= $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?= $this->translate('Sign up!'); ?></a>
 <?php endif; ?>
+
+<?php if($this->email){?>
+    <p>Forgot your password? click <a href="<?= $this->url('forgot-password',['email' => $this->email]);?>">here</a> to send a password reset email.</p>
+<?php } ?>

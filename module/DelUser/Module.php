@@ -4,6 +4,8 @@ namespace DelUser;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\EventManager\Event;
+use ZfcUser\Controller\RedirectCallback;
+use DelUser\Controller\UserController;
 
 class Module
 {
@@ -33,6 +35,37 @@ class Module
             exit;
         });
 
+    }
+
+
+
+    public function getControllerConfig()
+    {
+        return array(
+            'factories' => array(
+                'zfcuser' => function($controllerManager) {
+                    /* @var ControllerManager $controllerManager*/
+                    $serviceManager = $controllerManager->getServiceLocator();
+
+                    /* @var RedirectCallback $redirectCallback */
+                    $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
+
+                    /* @var UserController $controller */
+                    $controller = new UserController($redirectCallback);
+
+                    return $controller;
+                },
+            ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return [
+            'invokables' => [
+                'del_user_svc' => 'DelUser\Service\User',
+            ],
+        ];
     }
 
     public function getConfig()

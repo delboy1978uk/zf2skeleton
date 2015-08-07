@@ -37,13 +37,4 @@ class Module
             ],
         ];
     }
-
-    public function getServiceConfig()
-    {
-        return [
-            'invokables' => [
-                'del_user_svc' => 'Application\Service\User',
-            ],
-        ];
-    }
 }
