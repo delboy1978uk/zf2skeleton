@@ -32,5 +32,5 @@ $form->setAttribute('method', 'post');
 <?php endif; ?>
 
 <?php if($this->email){?>
-    <p>Forgot your password? click <a href="<?= $this->url('forgot-password',['email' => $this->email]);?>">here</a> to send a password reset email.</p>
+    <p>Forgot your password? click <a href="<?= $this->url('zfcuser/forgot-password',['email' => $this->email]);?>">here</a> to send a password reset email.</p>
 <?php } ?>

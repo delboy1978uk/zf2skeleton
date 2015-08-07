@@ -15,33 +15,13 @@ class UserController extends ZfcUserController
 {
     public function forgotPasswordAction()
     {
-        try {
-//            /** @var $svc \DelUser\Service\User */
-//            $svc = $this->getServiceLocator()->get('del_user_svc');
-//            $svc->sendPasswordResetEmail($this->params('email'));
-//
-//
-//
-//
-//            // Get the User
-//            /** @var $svc \ZfcUser\Service\User */
-//            $svc = $this->getServiceLocator()->get('zfcuser_user_service');
-//            $user = $svc->getUserMapper()->findByEmail($email);
-//            if(!$user){
-//                $this->getResponse()->setStatusCode(404);
-//                return true;
-//            }
-//
-//            // Mail the User
-//            /** @var $svc \HtUserRegistration\Service\UserRegistrationService */
-//            $svc = $this->getServiceLocator()->get('HtUserRegistration\UserRegistrationService');
-//            $svc->sendPasswordRequestEmail($user);
-        } catch(Exception $e) {
-
-        }
+        $email = $this->params()->fromRoute('email');
+        /** @var $svc \DelUser\Service\User */
+        $svc = $this->getServiceLocator()->get('del_user_svc');
+        $svc->sendPasswordResetEmail($email, $this->getServiceLocator());
 
         return new ViewModel([
-            'email' => $this->params()->fromRoute('email'),
+            'email' => $email,
         ]);
     }
 
