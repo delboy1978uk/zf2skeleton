@@ -27,6 +27,7 @@ return [
                 ['route' => 'zfcuser/verify-mail-sent', 'roles' => ['guest']],
                 ['route' => 'zfcuser/activated', 'roles' => ['guest']],
                 ['route' => 'zfcuser/forgot-password', 'roles' => ['guest']],
+                ['route' => 'zfcuser/reset-password', 'roles' => ['guest']],
                 ['route' => 'scn-social-auth-user/login', 'roles' => ['guest']],
                 ['route' => 'scn-social-auth-user/login/provider', 'roles' => ['guest']],
                 ['route' => 'scn-social-auth-hauth', 'roles' => ['guest']],

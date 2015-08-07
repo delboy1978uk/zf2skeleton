@@ -9,6 +9,7 @@ use ZfcUser\Service\User as UserSvc;
 use HtUserRegistration\Mapper\UserRegistrationMapperInterface;
 use DateTime;
 use MtMail\Service\Mail;
+use ZfcUser\Entity\User as ZfcUser;
 
 class User
 {
@@ -25,6 +26,7 @@ class User
 
         /** @var $svc UserSvc */
         $svc = $sl->get('zfcuser_user_service');
+        /** @var $user ZfcUser */
         $user = $svc->getUserMapper()->findByEmail($email);
         if(!$user){
             throw new Exception('No user found');
@@ -46,7 +48,7 @@ class User
             'to' => $email,
         ],
         'del-user/mail/reset-password',[
-            'email' => $email,
+            'id' => $user->getId(),
             'token' => $token,
             'time' => $time
         ]);

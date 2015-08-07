@@ -25,6 +25,17 @@ class UserController extends ZfcUserController
         ]);
     }
 
+    public function resetPasswordAction()
+    {
+        $id = $this->params()->fromRoute('id');
+        $token = $this->params()->fromRoute('token');
+
+        return new ViewModel([
+            'id' => $id,
+            'token' => $token,
+        ]);
+    }
+
 
 
 

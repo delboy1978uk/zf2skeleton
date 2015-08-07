@@ -15,6 +15,16 @@ return [
                             ],
                         ],
                     ],
+                    'reset-password' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/reset-password/:id/:token',
+                            'defaults' => [
+                                'controller' => 'zfcuser',
+                                'action' => 'reset-password',
+                            ],
+                        ],
+                    ],
                     'activated' => [
                         'type' => 'Literal',
                         'options' => [
