@@ -2,9 +2,10 @@
 A ZF2 skeleton app with a bit more meat on the bone.
 
 ##Included Modules
-* User Registration using ZfcUser
 * Email using MtMail
+* User Registration using ZfcUser
 * Email Verification using HtUserRegistration
+* Forgotten Password using DelUser
 * Authorisation using BjyAuthorise
 * Static Pages using PhlySimplePage
 * ZendDeveloperTools and BjyProfiler for development
