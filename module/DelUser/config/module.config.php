@@ -5,6 +5,28 @@ return [
         'routes' => [
             'zfcuser' => [
                 'child_routes' => [
+                    'verify-mail-sent' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/thanks-for-registering',
+                            'defaults' => [
+                                'controller' => 'PhlySimplePage\Controller\Page',
+                                'template'   => 'del-user/user/verify-mail-sent',
+                            ],
+                        ],
+                    ],
+                    'activated' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/activated',
+                            'defaults' => [
+                                'controller' => 'PhlySimplePage\Controller\Page',
+                                'template'   => 'del-user/user/activated',
+                                // optionally set a specific layout for this page
+                                //'layout'     => 'layout/some-layout',
+                            ],
+                        ],
+                    ],
                     'forgot-password' => [
                         'type' => 'Segment',
                         'options' => [
@@ -25,25 +47,13 @@ return [
                             ],
                         ],
                     ],
-                    'activated' => [
+                    'password-updated' => [
                         'type' => 'Literal',
                         'options' => [
-                            'route' => '/activated',
+                            'route' => '/password-updated',
                             'defaults' => [
                                 'controller' => 'PhlySimplePage\Controller\Page',
-                                'template'   => 'del-user/user/activated',
-                                // optionally set a specific layout for this page
-                                //'layout'     => 'layout/some-layout',
-                            ],
-                        ],
-                    ],
-                    'verify-mail-sent' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/thanks-for-registering',
-                            'defaults' => [
-                                'controller' => 'PhlySimplePage\Controller\Page',
-                                'template'   => 'del-user/user/verify-mail-sent',
+                                'template'   => 'del-user/user/password-updated',
                             ],
                         ],
                     ],

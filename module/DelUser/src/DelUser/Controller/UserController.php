@@ -40,10 +40,26 @@ class UserController extends ZfcUserController
 
         $form = new ResetPassword('reset-pass');
 
+        $prg = $this->prg($this->url()->fromRoute('zfcuser/reset-password',['id'=>$id,'token'=>$token]), true);
 
-        return new ViewModel([
-            'form' => $form
-        ]);
+        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            // form not posted yet
+            return ['form' => $form];
+        }
+
+        // $prg is an array containing the POST params from the previous request
+        $form->setData($prg);
+        if($form->isValid())
+        {
+            /** @var $svc \DelUser\Service\User */
+            $svc = $this->getServiceLocator()->get('del_user_svc');
+            $svc->resetPassword($id,$form,$this->getServiceLocator());
+            $this->redirect()->toRoute('zfcuser/password-updated');
+        }
+        // form didnt validate
+        return ['form' => $form];
     }
 
 

@@ -9,6 +9,7 @@ namespace DelUser\Form;
 
 use Zend\Form\Form;
 use ZfcBase\Form\ProvidesEventsForm;
+use DelUser\Form\ResetPasswordFilter;
 
 class ResetPassword extends ProvidesEventsForm
 {
@@ -48,6 +49,8 @@ class ResetPassword extends ProvidesEventsForm
                 'class' => 'btn btn-primary'
             ),
         ));
+
+        $this->setInputFilter(new ResetPasswordFilter());
 
         $this->getEventManager()->trigger('init', $this);
     }

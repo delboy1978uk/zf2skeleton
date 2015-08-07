@@ -3,6 +3,7 @@
 namespace DelUser\Service;
 
 use Exception;
+use Zend\Crypt\Password\Bcrypt;
 use Zend\Validator\EmailAddress;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ZfcUser\Service\User as UserSvc;
@@ -71,6 +72,23 @@ class User
 
     }
 
+    public function resetPassword($id,$form,ServiceLocatorInterface $sl)
+    {
+        $this->sl = $sl;
+        /** @var $user ZfcUser */
+        $user = $this->getZfcUserSvc()->getUserMapper()->findById($id);
+        if(!$user)
+        {
+            throw new Exception('No user found with that ID.');
+        }
+        $bcrypt = new Bcrypt();
+        $bcrypt->setCost(14);
+        $new = $form->get('newCredential')->getValue();
+        $password = $bcrypt->create($new);
+        $user->setPassword($password);
+        $this->getZfcUserSvc()->getUserMapper()->update($user);
+    }
+
     /**
      * @param $id
      * @param $token
@@ -97,7 +115,7 @@ class User
     /**
      * @return \MtMail\Service\Mail
      */
-    public function getMailer()
+    private function getMailer()
     {
         if(!$this->mailer)
         {
@@ -110,7 +128,7 @@ class User
     /**
      * @return array|object|UserSvc
      */
-    public function getZfcUserSvc()
+    private function getZfcUserSvc()
     {
         if(!$this->zfc_user_svc)
         {
@@ -123,7 +141,7 @@ class User
     /**
      * @return array|UserRegistrationMapperInterface|object
      */
-    public function getRegMapper()
+    private function getRegMapper()
     {
         if(!$this->reg_mapper)
         {
