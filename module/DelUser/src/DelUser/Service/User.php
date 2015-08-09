@@ -150,5 +150,8 @@ class User
         return $this->reg_mapper;
     }
 
+    public function resendActivationEmail()
+    {
 
+    }
 }

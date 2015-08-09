@@ -1,3 +1,13 @@
-<div class="info info-error">
-    An error occured during verification of email.
+<?php use Del\Icon; ?>
+<div class="alert alert-danger">
+    <?= Icon::WARNING ?> An error occured during verification of email.
 </div>
+<h1>Email activation error.</h1>
+
+<?php if($this->layout()->id){ ?>
+    <p>The activation link has expired. Click <a href="<?= $this->url('zfcuser/resend-activation',[
+            'id' => $this->layout()->id
+        ]);?>">here</a> to send a fresh activation email.</p>
+<?php } else { ?>
+    <p>The activation link was invalid. The security token did not match.</p>
+<?php }

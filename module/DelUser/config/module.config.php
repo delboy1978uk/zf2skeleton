@@ -27,6 +27,16 @@ return [
                             ],
                         ],
                     ],
+                    'resend-activation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/resend-activation-email/:id',
+                            'defaults' => [
+                                'controller' => 'zfcuser',
+                                'action'   => 'resend-activation-email',
+                            ],
+                        ],
+                    ],
                     'forgot-password' => [
                         'type' => 'Segment',
                         'options' => [

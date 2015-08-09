@@ -151,4 +151,11 @@ class UserController extends ZfcUserController
     }
 
 
+
+
+    public function resendActivationEmailAction()
+    {
+        return new ViewModel([]);
+    }
+
 }

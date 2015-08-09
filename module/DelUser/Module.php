@@ -15,11 +15,13 @@ class Module
         $eventManager        = $app->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-
         $sharedManager  = $eventManager->getSharedManager();
-        $sharedManager->attach('ZfcUser\Service\User', 'register.post', function (Event $event) use ($e) {
 
+        // When a new user registers
+        $sharedManager->attach('ZfcUser\Service\User', 'register.post', function (Event $event) use ($e) {
             $user = $event->getParam('user');
+
+            // Add a role for the new user
             $adapter = $e->getApplication()->getServiceManager()->get('zfcuser_zend_db_adapter');
             $sql = new \Zend\Db\Sql\Sql($adapter);
             $insert = new \Zend\Db\Sql\Insert('user_role_linker');
@@ -27,7 +29,8 @@ class Module
             $insert->values(array('user_id' => $user->getId(), 'role_id' => 'user'), $insert::VALUES_MERGE);
             $adapter->query($sql->getSqlStringForSqlObject($insert), $adapter::QUERY_MODE_EXECUTE);
 
-            $url = $e->getRouter()->assemble(array(), array('name' => 'verify-mail-sent'));
+            // Send him to the verification email sent page
+            $url = $e->getRouter()->assemble(array(), array('name' => 'zfcuser/verify-mail-sent'));
             $response = $e->getResponse();
             $response->getHeaders()->addHeaderLine('Location', $url);
             $response->setStatusCode(302);
@@ -35,7 +38,13 @@ class Module
             exit;
         });
 
+        // When someone tries to verify their email
+        $sharedManager->attach('HtUserRegistration\Service\UserRegistrationService', 'tokenExpired', function (Event $event) use ($e) {
+            $user = $event->getParam('user');
+            $e->getViewModel()->setVariable('id',$user->getId());
+        });
     }
+
 
 
 

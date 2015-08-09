@@ -93,7 +93,7 @@ $options = array(
     /**
      * Post Verification route
      */
-     'post_verification_route' => 'activated'
+     'post_verification_route' => 'zfcuser/activated'
 );
 
 /**

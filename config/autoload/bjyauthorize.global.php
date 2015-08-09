@@ -26,6 +26,7 @@ return [
                 ['route' => 'zfcuser/verify_email', 'roles' => ['guest']],
                 ['route' => 'zfcuser/verify-mail-sent', 'roles' => ['guest']],
                 ['route' => 'zfcuser/activated', 'roles' => ['guest']],
+                ['route' => 'zfcuser/resend-activation', 'roles' => ['guest']],
                 ['route' => 'zfcuser/forgot-password', 'roles' => ['guest']],
                 ['route' => 'zfcuser/reset-password', 'roles' => ['guest']],
                 ['route' => 'zfcuser/password-updated', 'roles' => ['guest']],
