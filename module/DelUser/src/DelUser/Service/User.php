@@ -150,8 +150,29 @@ class User
         return $this->reg_mapper;
     }
 
-    public function resendActivationEmail()
+    /**
+     * @param int $id
+     * @param ServiceLocatorInterface $sl
+     * @return array
+     */
+    public function resendActivationEmail($id,ServiceLocatorInterface $sl)
     {
+        $this->sl = $sl;
+        $user = $this->getZfcUserSvc()->getUserMapper()->findById($id);
+        /** @var \HtUserRegistration\Entity\UserRegistration $reg */
+        $reg = $this->getRegMapper()->findByUser($user);
 
+        $reg->setRequestTime(new DateTime('+ 1 day'));
+        $reg->setResponded(false);
+        $this->getRegMapper()->update($reg);
+
+        /** @var $svc \HtUserRegistration\Mailer\Mailer */
+        $svc = $sl->get('HtUserRegistration\Mailer\Mailer');
+        $svc->sendVerificationEmail($reg);
+        
+        return [
+            'message' => 'Account activation email sent',
+            'class' => 'success',
+        ];
     }
 }

@@ -38,7 +38,7 @@ class Module
             exit;
         });
 
-        // When someone tries to verify their email
+        // When someone tries to verify their email and the token has expired
         $sharedManager->attach('HtUserRegistration\Service\UserRegistrationService', 'tokenExpired', function (Event $event) use ($e) {
             $user = $event->getParam('user');
             $e->getViewModel()->setVariable('id',$user->getId());

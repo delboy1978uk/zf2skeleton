@@ -10,6 +10,7 @@ namespace DelUser\Controller;
 use Zend\View\Model\ViewModel;
 use ZfcUser\Controller\UserController as ZfcUserController;
 use DelUser\Form\ResetPassword;
+use Exception;
 
 class UserController extends ZfcUserController
 {
@@ -155,7 +156,18 @@ class UserController extends ZfcUserController
 
     public function resendActivationEmailAction()
     {
-        return new ViewModel([]);
+        $id = $this->params()->fromRoute('id');
+        try{
+            /** @var $svc \DelUser\Service\User */
+            $svc = $this->getServiceLocator()->get('del_user_svc');
+            $result = $svc->resendActivationEmail($id, $this->getServiceLocator());
+        } catch(Exception $e) {
+            $result = [
+                'message' => $e->getMessage(),
+                'class' => 'danger',
+            ];
+        }
+        return new ViewModel($result);
     }
 
 }
